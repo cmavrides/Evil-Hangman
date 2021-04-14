@@ -30,10 +30,8 @@ public class PlayHangman {
         System.out.println("You choose to use maximum of tries = "+guessNum);
 
         Hangman game = new Hangman(length, guessNum, dictionary);       
-        System.out.println("guesses: "+ game.getTriesAmount());
-        System.out.println("words: " + game.dictionarySize());
-        System.out.println("guessed:" + game.getGuesses());
-    	game.printCurrentState();  
+
+        game.printSums();
     	
       
         while(!game.exitGame()){
@@ -56,15 +54,26 @@ public class PlayHangman {
             }
            
             
-            System.out.println("guesses: "+ game.getTriesAmount());
-            System.out.println("words: " + game.dictionarySize());
-            System.out.print("guessed: ");
-            System.out.println(game.getGuesses());
-            game.printCurrentState();
+           game.printSums();
             
         }
+        
 
-	 private static char checkLetterInput(Scanner sc){
+        if (game.Winner()){
+            System.out.println("You won!!!");
+        }
+        else{
+            System.out.println("Game Over. You lost.");
+        }
+
+        System.out.println("answer = ");
+        System.out.println(game.getAnswer());
+        sc.close();
+        
+    }
+
+    
+    private static char checkLetterInput(Scanner sc){
         while(true){
             if (sc.hasNext()){
                 String temp = sc.next();
@@ -77,4 +86,3 @@ public class PlayHangman {
         }
     }
 }
-

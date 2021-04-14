@@ -1,3 +1,4 @@
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -32,6 +33,16 @@ public class Hangman {
 		  return this.dictionary.size();
 	  }
 	  
+	  public boolean Winner() {
+	        if (!exitGame()) {
+	            System.out.println("Game not over yet");
+	            return false;
+	        } 
+	        else {
+	            return !output.contains("_");
+	        }
+	    }
+	  
 	  public void printCurrentState() {
 		  String s = "";
 		  for(int i=0;i<this.output.length()-1;i++)
@@ -39,8 +50,38 @@ public class Hangman {
 		  s+=this.output.charAt(this.output.length()-1);
 		  System.out.println(s);
 	  }
-
- public boolean playGame(char guess) {
+	  
+	  public int dictionarySize() {
+		  return dictionary.size();
+	  }
+	  
+	  
+	  public String getGuesses() {
+		  return this.guesses.toString();
+	  }
+	  
+	  public boolean checkDoublicate(char guess) {
+		  for(Character a : this.guesses)
+	        	if(a == guess)
+	        		return true;
+		  return false;
+	  }
+	  
+	  public String getAnswer() {
+		  if(exitGame())
+			  return answer;
+			  else
+				  return null;
+		  
+	  }	 
+	  
+	  private void addKey(String key, String word, HashMap<String, ArrayList<String>> wordChoiceMap) {
+	        if (wordChoiceMap.get(key) == null) {
+	            wordChoiceMap.put(key, new ArrayList<>());
+	        }
+	        wordChoiceMap.get(key).add(word);
+	    }
+	  public boolean playGame(char guess) {
 		  String temp = output;
 	        boolean guessRight = false;
 	        HashMap<String, ArrayList<String>> wordChoices = new HashMap<>();
@@ -61,8 +102,9 @@ public class Hangman {
 	            }
 	            String keyString = new String(key);
 	            addKey(keyString, word, wordChoices);
+
 	        }
-	        //se periptosi pou mini ena guess gia ton pekti
+	        
 	        if (triesAmount == 1) {
 	            if (wordChoices.keySet().contains(output)) {
 	                dictionary = new ArrayList<>(wordChoices.get(output));
@@ -72,7 +114,7 @@ public class Hangman {
 	                return false;
 	            }
 	        }
-		 for (String key: wordChoices.keySet()) {
+	        for (String key: wordChoices.keySet()) {
 	        	if (!wordChoices.keySet().contains(temp)) {
 	        		temp=key;
 	        	}
@@ -95,49 +137,17 @@ public class Hangman {
 	            guesses.add(guess);
 	            return false;
 	        }
-
-  
-	  
-	  
-  public boolean checkDoublicate(char guess) {
-		  for(Character a : this.guesses)
-	        	if(a == guess)
-	        		return true;
-		  return false;
-	  }
-
-public String getAnswer() {
-		  if(exitGame())
-			  return answer;
-			  else
-				  return null;
-		  
-	  }
-
-public int dictionarySize() {
-		  return dictionary.size();
 	  }
 	  
-	  public boolean Winner() {
-	        if (!exitGame()) {
-	            System.out.println("Game not over yet");
-	            return false;
-	        } 
-	        else {
-	            return !output.contains("_");
-	        }
-	    }
-private void addKey(String key, String word, HashMap<String, ArrayList<String>> wordChoiceMap) {
-    if (wordChoiceMap.get(key) == null) {
-        wordChoiceMap.put(key, new ArrayList<>());
-    }
-    wordChoiceMap.get(key).add(word);
-}
-
-public String getGuesses() {
-		  return this.guesses.toString();
+	  
+	  public void printSums() {
+		  System.out.println("guesses: "+ getTriesAmount());
+	        System.out.println("words: " + dictionarySize());
+	        System.out.println("guessed:" + getGuesses());
+	    	printCurrentState(); 
+	    	System.out.println();
 	  }
-
+	  
 	  private int getUniqueChars(ArrayList<String> words) {
 	        int counter = 0;
 	        if (words == null) return 0;
@@ -153,10 +163,4 @@ public String getGuesses() {
 	        }
 	        return counter;
 	    }
-
-
-
-
-}	  
-	  
-	  
+}
