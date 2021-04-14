@@ -140,14 +140,6 @@ public class Hangman {
 	  }
 	  
 	  
-	  public void printSums() {
-		  System.out.println("guesses: "+ getTriesAmount());
-	        System.out.println("words: " + dictionarySize());
-	        System.out.println("guessed:" + getGuesses());
-	    	printCurrentState(); 
-	    	System.out.println();
-	  }
-	  
 	  private int getUniqueChars(ArrayList<String> words) {
 	        int counter = 0;
 	        if (words == null) return 0;
@@ -163,4 +155,12 @@ public class Hangman {
 	        }
 	        return counter;
 	    }
+
+	public void printSums() {
+		  System.out.println("guesses: "+ getTriesAmount());
+	        System.out.println("words: " + dictionarySize());
+	        System.out.println("guessed:" + getGuesses());
+	    	printCurrentState(); 
+	    	System.out.println();
+	  }
 }
