@@ -73,6 +73,13 @@ public String getGuesses() {
 		  return this.guesses.toString();
 	  }
 
+private void addKey(String key, String word, HashMap<String, ArrayList<String>> wordChoiceMap) {
+    if (wordChoiceMap.get(key) == null) {
+        wordChoiceMap.put(key, new ArrayList<>());
+    }
+    wordChoiceMap.get(key).add(word);
+}
+
  public boolean playGame(char guess) {
 		  String temp = output;
 	        boolean guessRight = false;
@@ -81,6 +88,29 @@ public String getGuesses() {
 	        if (exitGame()) {
 	            System.out.println("Game Over");
 	            return Winner();
+	        }
+	        for (String word : dictionary) {
+	            char[] key = new char[letterAmount];
+	            for (int index = 0; index < letterAmount; index++) {
+	                if (word.charAt(index) == guess) {
+	                    key[index] = guess;
+	                } 
+	                else {
+	                    key[index] = output.charAt(index);
+	                }
+	            }
+	            String keyString = new String(key);
+	            addKey(keyString, word, wordChoices);
+	        }
+	        //se periptosi pou mini ena guess gia ton pekti
+	        if (triesAmount == 1) {
+	            if (wordChoices.keySet().contains(output)) {
+	                dictionary = new ArrayList<>(wordChoices.get(output));
+	                triesAmount--;
+	                answer = wordChoices.get(output).get(0);
+	                guesses.add(guess);
+	                return false;
+	            }
 	        }
 }	  
 	  
