@@ -63,3 +63,18 @@ public class PlayHangman {
             game.printCurrentState();
             
         }
+
+	 private static char checkLetterInput(Scanner sc){
+        while(true){
+            if (sc.hasNext()){
+                String temp = sc.next();
+                if (temp.length()==1 && Character.isLetter(temp.charAt(0))){
+                    System.out.println("Your letter is: " + temp.charAt(0));
+                    return temp.charAt(0);
+                }
+            }
+            System.out.println("Input is invalid. Please enter one letter: ");
+        }
+    }
+}
+
