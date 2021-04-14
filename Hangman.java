@@ -40,62 +40,6 @@ public class Hangman {
 		  System.out.println(s);
 	  }
 
-  public int dictionarySize() {
-		  return dictionary.size();
-	  }
-	  
-	  public boolean Winner() {
-	        if (!exitGame()) {
-	            System.out.println("Game not over yet");
-	            return false;
-	        } 
-	        else {
-	            return !output.contains("_");
-	        }
-	    }
-	  
-	  
-  public boolean checkDoublicate(char guess) {
-		  for(Character a : this.guesses)
-	        	if(a == guess)
-	        		return true;
-		  return false;
-	  }
-
-public String getAnswer() {
-		  if(exitGame())
-			  return answer;
-			  else
-				  return null;
-		  
-	  }
-public String getGuesses() {
-		  return this.guesses.toString();
-	  }
-
-	  private int getUniqueChars(ArrayList<String> words) {
-	        int counter = 0;
-	        if (words == null) return 0;
-	        for (String word:words){
-	            char[] tempArray = word.toCharArray();
-	            HashSet<Character> uniqueChars = new HashSet<>();
-	            for (char c : tempArray) {
-	                if (!guesses.contains(c)){
-	                    uniqueChars.add(c);
-	                }
-	            }
-	            counter += uniqueChars.size();
-	        }
-	        return counter;
-	    }
-
-private void addKey(String key, String word, HashMap<String, ArrayList<String>> wordChoiceMap) {
-    if (wordChoiceMap.get(key) == null) {
-        wordChoiceMap.put(key, new ArrayList<>());
-    }
-    wordChoiceMap.get(key).add(word);
-}
-
  public boolean playGame(char guess) {
 		  String temp = output;
 	        boolean guessRight = false;
@@ -151,6 +95,68 @@ private void addKey(String key, String word, HashMap<String, ArrayList<String>> 
 	            guesses.add(guess);
 	            return false;
 	        }
+
+  
+	  
+	  
+  public boolean checkDoublicate(char guess) {
+		  for(Character a : this.guesses)
+	        	if(a == guess)
+	        		return true;
+		  return false;
+	  }
+
+public String getAnswer() {
+		  if(exitGame())
+			  return answer;
+			  else
+				  return null;
+		  
+	  }
+
+public int dictionarySize() {
+		  return dictionary.size();
+	  }
+	  
+	  public boolean Winner() {
+	        if (!exitGame()) {
+	            System.out.println("Game not over yet");
+	            return false;
+	        } 
+	        else {
+	            return !output.contains("_");
+	        }
+	    }
+private void addKey(String key, String word, HashMap<String, ArrayList<String>> wordChoiceMap) {
+    if (wordChoiceMap.get(key) == null) {
+        wordChoiceMap.put(key, new ArrayList<>());
+    }
+    wordChoiceMap.get(key).add(word);
+}
+
+public String getGuesses() {
+		  return this.guesses.toString();
+	  }
+
+	  private int getUniqueChars(ArrayList<String> words) {
+	        int counter = 0;
+	        if (words == null) return 0;
+	        for (String word:words){
+	            char[] tempArray = word.toCharArray();
+	            HashSet<Character> uniqueChars = new HashSet<>();
+	            for (char c : tempArray) {
+	                if (!guesses.contains(c)){
+	                    uniqueChars.add(c);
+	                }
+	            }
+	            counter += uniqueChars.size();
+	        }
+	        return counter;
+	    }
+
+
+
+
 }	  
 	  
 	  
