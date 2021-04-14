@@ -54,9 +54,7 @@ public class Hangman {
 	        }
 	    }
 	  
-	  public String getGuesses() {
-		  return this.guesses.toString();
-	  }
+	  
   public boolean checkDoublicate(char guess) {
 		  for(Character a : this.guesses)
 	        	if(a == guess)
@@ -70,6 +68,20 @@ public String getAnswer() {
 			  else
 				  return null;
 		  
-	  }	  
+	  }
+public String getGuesses() {
+		  return this.guesses.toString();
+	  }
+
+ public boolean playGame(char guess) {
+		  String temp = output;
+	        boolean guessRight = false;
+	        HashMap<String, ArrayList<String>> wordChoices = new HashMap<>();
+	        
+	        if (exitGame()) {
+	            System.out.println("Game Over");
+	            return Winner();
+	        }
+}	  
 	  
 	  
