@@ -73,6 +73,22 @@ public String getGuesses() {
 		  return this.guesses.toString();
 	  }
 
+	  private int getUniqueChars(ArrayList<String> words) {
+	        int counter = 0;
+	        if (words == null) return 0;
+	        for (String word:words){
+	            char[] tempArray = word.toCharArray();
+	            HashSet<Character> uniqueChars = new HashSet<>();
+	            for (char c : tempArray) {
+	                if (!guesses.contains(c)){
+	                    uniqueChars.add(c);
+	                }
+	            }
+	            counter += uniqueChars.size();
+	        }
+	        return counter;
+	    }
+
 private void addKey(String key, String word, HashMap<String, ArrayList<String>> wordChoiceMap) {
     if (wordChoiceMap.get(key) == null) {
         wordChoiceMap.put(key, new ArrayList<>());
@@ -111,6 +127,29 @@ private void addKey(String key, String word, HashMap<String, ArrayList<String>> 
 	                guesses.add(guess);
 	                return false;
 	            }
+	        }
+		 for (String key: wordChoices.keySet()) {
+	        	if (!wordChoices.keySet().contains(temp)) {
+	        		temp=key;
+	        	}
+	       
+	        	if(getUniqueChars(wordChoices.get(key))>getUniqueChars(wordChoices.get(temp))) {
+	        		temp=key;
+	        	}
+	        }
+	        if (wordChoices.keySet().contains(temp)) {
+	            dictionary = new ArrayList<>(wordChoices.get(temp));
+	            guessRight = !temp.equals(output);
+	            if (!guessRight) triesAmount--;
+	            output = temp;
+	            answer = wordChoices.get(output).get(0);
+	            guesses.add(guess);
+	            return guessRight;
+	        } 
+	        else {
+	            dictionary = new ArrayList<>();
+	            guesses.add(guess);
+	            return false;
 	        }
 }	  
 	  
