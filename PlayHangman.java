@@ -62,6 +62,16 @@ public class PlayHangman {
             System.out.println(game.getGuesses());
             game.printCurrentState();
             
+            if (game.Winner()){
+                System.out.println("You won!!!");
+            }
+            else{
+                System.out.println("Game Over. You lost.");
+            }
+
+            System.out.println("answer = ");
+            System.out.println(game.getAnswer());
+            sc.close();
         }
 
 	 private static char checkLetterInput(Scanner sc){
