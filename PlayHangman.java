@@ -56,6 +56,16 @@ public class PlayHangman {
             
            game.printSums();
             
+            if (game.Winner()){
+                System.out.println("You won!!!");
+            }
+            else{
+                System.out.println("Game Over. You lost.");
+            }
+
+            System.out.println("answer = ");
+            System.out.println(game.getAnswer());
+            sc.close();
         }
         
 
