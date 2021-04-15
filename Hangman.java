@@ -4,11 +4,11 @@ import java.util.stream.Collectors;
 
 /**
  * @author Alexandros Patsalides / 1028348
- * @author Christodoulos Mavrides / 
+ * @author Christodoulos Mavrides / 1040660 
  * 
- * @version 3.0
+ * @version 4.0
  * 
- * This method represents the object Hangman - a very well known game;
+ * This class represents the object Hangman - a very well known game;
  * It is not a fair game because the computer hides the guessing process in order to play not by
  * the rules but in a way that makes it super hard for the user to win.
  *
@@ -129,13 +129,25 @@ public class Hangman {
 		  
 	  }	 
 	  
-	  private void addKey(String key, String word, HashMap<String, ArrayList<String>> wordChoiceMap) {
+	/**
+	 * This Method adds a word-key to the Hashmap 
+	 * It checks if it already exits and creates a new ArrayList to put it in
+	 * @param key	key of the pair
+	 * @param word 	value of the pair
+	 * @param wordChoiceMap The Hashmap of the pairs
+	 */
+	private void addKey(String key, String word, HashMap<String, ArrayList<String>> wordChoiceMap) {
 	        if (wordChoiceMap.get(key) == null) {
 	            wordChoiceMap.put(key, new ArrayList<>());
 	        }
 	        wordChoiceMap.get(key).add(word);
 	    }
-	  public boolean playGame(char guess) {
+	
+	/**
+	 * This method plays the Game based on the given character
+	 * @param guess The character that was given by the user
+	 */
+	public boolean playGame(char guess) {
 		  String temp = output;
 	        boolean guessRight = false;
 	        HashMap<String, ArrayList<String>> wordChoices = new HashMap<>();
@@ -193,7 +205,9 @@ public class Hangman {
 	        }
 	  }
 	  
-	  
+	  /**
+	   * This Method prints the Sums of guesses, words and guessed letters
+	   */
 	  public void printSums() {
 		  System.out.println("guesses: "+ getTriesAmount());
 	        System.out.println("words: " + dictionarySize());
@@ -202,6 +216,10 @@ public class Hangman {
 	    	System.out.println();
 	  }
 	  
+	  /**
+	   * This method finds the number of unique chars in each word of the ArrayList
+	   * @param words The ArrayList of words
+	   */
 	  private int getUniqueChars(ArrayList<String> words) {
 	        int counter = 0;
 	        if (words == null) return 0;

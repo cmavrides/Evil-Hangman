@@ -4,7 +4,15 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
+/**
+ * @author Alexandros Patsalides / 1028348
+ * @author Christodoulos Mavrides / 1040660 
+ * 
+ * @version 1.0
+ * 
+ * This class contains the main method of the Hangman game and
+ * controlls the behaviour of the Hangman class
+ */
 public class PlayHangman {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -72,7 +80,11 @@ public class PlayHangman {
         
     }
 
-    
+    /**
+     * This is a checker method that checks the users input
+     * @param sc The Scanner
+     * @return It returns the character if valid or inputs an other char
+     */
     private static char checkLetterInput(Scanner sc){
         while(true){
             if (sc.hasNext()){
