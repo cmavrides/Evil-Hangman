@@ -8,14 +8,14 @@ import java.util.Scanner;
  * @author Alexandros Patsalides / 1028348
  * @author Christodoulos Mavrides / 1040660 
  * 
- * @version 1.0
+ * @version 3.0
  * 
  * This class contains the main method of the Hangman game and
  * controlls the behaviour of the Hangman class
  */
 public class PlayHangman {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        Scanner scan = new Scanner(System.in);
         int length = 0;
         int guessNum = 0;
         ArrayList<String> dictionary = new ArrayList<String>();
@@ -45,7 +45,7 @@ public class PlayHangman {
         while(!game.exitGame()){
                   
         	System.out.println("Your guess? ");
-            guess = checkLetterInput(sc);
+            guess = checkLetters(scan);
             if(game.checkDoublicate(guess)) {
             	System.out.println("You already guessed that!");
             	System.out.println();
@@ -76,19 +76,19 @@ public class PlayHangman {
 
         System.out.println("answer = ");
         System.out.println(game.getAnswer());
-        sc.close();
+        scan.close();
         
     }
 
     /**
      * This is a checker method that checks the users input
-     * @param sc The Scanner
+     * @param scan The Scanner
      * @return It returns the character if valid or inputs an other char
      */
-    private static char checkLetterInput(Scanner sc){
+    private static char checkLetters(Scanner scan){
         while(true){
-            if (sc.hasNext()){
-                String temp = sc.next();
+            if (scan.hasNext()){
+                String temp = scan.next();
                 if (temp.length()==1 && Character.isLetter(temp.charAt(0))){
                     System.out.println("Your letter is: " + temp.charAt(0));
                     return temp.charAt(0);
